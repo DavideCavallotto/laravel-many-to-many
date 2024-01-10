@@ -5,9 +5,16 @@
     <section class="container text-center">
         <h1>Projects Show</h1>
         <img class="w-50" src="{{$project->image}}" alt="">
+        <ul>
+            @foreach ($project->technologies as $technology)
+                <li class="badge rounded-pill text-bg-danger">{{$technology->name}}</li>
+            @endforeach
+
+        </ul>
         <h1>{{$project->title}}</h1>
         <p>{{$project->description}}</p>
         <p>{{ optional($project->type)->name}}</p>
+
     </section>
     <div class="text-center mb-2">
         <a class="text-light text-decoration-none btn btn-primary" href="{{route('admin.projects.index')}}">I miei Progetti</a>
