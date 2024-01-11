@@ -84,13 +84,20 @@ class ProjectController extends Controller
             'title' => 'required|max:255',
             'description' => 'required',
             'image' => 'required', // Assumendo che l'immagine sia un URL, altrimenti cambia la regola di validazione
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ]);       
             
 
         $data = $request->all();
 
         $project->update($data);
+
+        if ($request->has('technologies')) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->detach();
+        }
         
 
         return redirect()->route('admin.projects.show', $project->id);

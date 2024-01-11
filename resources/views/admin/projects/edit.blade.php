@@ -37,7 +37,7 @@
     
                 <input name="technologies[]" class="form-check-input" type="checkbox" 
                 value="{{$technology->id}}" id="technologies-{{$technology->id}}" 
-                @checked( in_array($technology->id, old('technologies', [])))>
+                @checked( in_array($technology->id, old('technologies', $project->technologies->pluck('id')->all())))>
     
                 <label class="form-check-label" for="technologies-{{$technology->id}}">{{$technology->name}}</label>
             </div>
